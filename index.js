@@ -1,6 +1,7 @@
-// Get Express and File System and Path:
+// Get Express and File System and Path and the Port:
 const express = require('express');
 const fs = require('fs');
+const PORT = process.env.PORT || 3000;
 //const { readFile } = require('fs').promises;
 const path = require('path');
 // Get app:
@@ -42,8 +43,9 @@ app.use((request, response, next) => {
 });
 
 // Start listening on port:
-app.listen(process.env.PORT || 3000, (err) => {
+app.listen(PORT, (err) => {
     if (err) {
         console.log(err);
     }
+    console.log(`Listening to port: ${PORT}.`);
 });
