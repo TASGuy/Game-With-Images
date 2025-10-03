@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "render-build": "npm install --build-from-source canvas",
     "start": "node ."
   },
   "keywords": [],
