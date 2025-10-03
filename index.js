@@ -12,7 +12,7 @@ function noPage(request, response, next) {
     response.status(404).send('<h1 style="font-family: monospace, sans-serif;">Status: 404. Page not found.</h1>');
 }
 
-// Handle subdomains:
+// Handle subdomains (api.):
 var subdomains = [];
 app.use((request, response, next) => {
     let subdomain = request.hostname.split('.');
@@ -23,7 +23,7 @@ app.use((request, response, next) => {
         subdomain = undefined;
     }
     if (subdomain !== undefined && subdomain !== 'node_modules') {
-        let filePath = path.join(__dirname + '/' + subdomain, request.path.substring(1) + '.js');
+        let filePath = path.join(__dirname + '/' + subdomain, request.path.substring(1).split('/')[0].split('.')[0] + '.js');
         if (fs.existsSync(filePath)) {
             require(filePath)(request, response, next);
         } else {
