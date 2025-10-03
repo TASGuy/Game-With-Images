@@ -3,7 +3,7 @@ const { GIFEncoder, quantize, applyPalette } = require('gifenc');
 
 module.exports = (request, response, next) => {
     let orgInput = request.path.substring(1).split('/')[1];
-    orgInput = orgInput.substring(1);
+    orgInput = orgInput ? orgInput.substring(1) : '';
     let input = [];
     for (let i = orgInput.length - 1; i >= 0; i--) input.push(orgInput[i]);
 
