@@ -1,7 +1,7 @@
 const { createCanvas, loadImage } = require('canvas');
-const { GIFEncoder, quantize, applyPalette } = require('gifenc');
+//const { GIFEncoder, quantize, applyPalette } = require('gifenc');
 
-module.exports = (request, response, next) => {
+/*module.exports = (request, response, next) => {
     let orgInput = request.path.substring(1).split('/')[1];
     orgInput = orgInput ? orgInput.substring(1) : '';
     let input = [];
@@ -69,4 +69,4 @@ function encodeFramesToGif(frameBuffers, delay, width, height) {
     // 2. Retrieve the data using the .buffer property and convert to a Node.js Buffer
     // The gif.buffer property holds the internal ArrayBuffer of the GIF data.
     return Buffer.from(gif.buffer); 
-}
+}*/
