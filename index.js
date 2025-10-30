@@ -1,4 +1,5 @@
 // Get Express and File System and Path and the Port:
+const e = require('express');
 const express = require('express');
 const fs = require('fs');
 const PORT = process.env.PORT || 3000;
@@ -35,7 +36,16 @@ app.use((request, response, next) => {
 });
 
 // Handle static files/the website:
-app.use('/', express.static(path.join(__dirname + '/public')));
+//app.use('/', express.static(path.join(__dirname.slice(0, __dirname.indexOf('.') !== -1 ? __dirname.indexOf('.') : __dirname.length), 'public')));
+app.use((request, response, next) => {
+    let filePath = path.join(__dirname, 'public', request.path.slice(0, request.path.indexOf('.') !== -1 ? request.path.indexOf('.') : request.path.length), 'index.html');
+    if (fs.existsSync(filePath)) {
+        let file = fs.readFileSync(filePath, 'utf8');
+        response.send(file);
+    } else {
+        noPage(request, response, next);
+    }
+});
 
 // Handle page not found:
 app.use((request, response, next) => {

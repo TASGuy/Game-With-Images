@@ -3,7 +3,7 @@ const { Buffer } = require('buffer');
 
 function makePlainBackground(width, height, color) {
     let arr = [];
-    for (let r = 0; r < width; r++) for (let c = 0; c < height; c++) for(let i = 0; i < 4; i++) arr.push(i === 3 ? 255 : color[i]);
+    for (let r = 0; r < width; r++) for (let c = 0; c < height; c++) for (let i = 0; i < 4; i++) arr.push(i === 3 ? 255 : color[i]);
     return arr;
 }
 
@@ -17,7 +17,7 @@ module.exports = (request, response, next) => {
 
     let canvas = { p: [], frames: [], width: 400, height: 300 };
     canvas.p = makePlainBackground(canvas.width, canvas.height, [255, 255, 255]);
-    overlayTextOnPixelData(input.join(' '), canvas.p, canvas.width, canvas.height, { ...textSettings, ...{ paddingX: 5*textSettings.scale, paddingY: 7*textSettings.scale } });
+    overlayTextOnPixelData(input.join(''), canvas.p, canvas.width, canvas.height, { ...textSettings, ...{ paddingX: 5*textSettings.scale, paddingY: 6*textSettings.scale } });
     pushPixelData(canvas.frames, canvas.p);
     canvas.p = makePlainBackground(canvas.width, canvas.height, [255, 255, 200]);
     pushPixelData(canvas.frames, canvas.p);
@@ -138,6 +138,7 @@ function overlayTextOnPixelData(text, pixelArray, width, height, options = {}) {
         "!": [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
         "?": [0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
         " ": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "_": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
     };
 
     // 1. Calculate the required size of the text block (in output pixels)
